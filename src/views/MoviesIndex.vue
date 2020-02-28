@@ -1,26 +1,34 @@
 <template>
   <div class="movies-index">
-    <h1>{{ message }}</h1>
-    <br />
-    <h1>All Movies</h1>
-    <div v-for="movie in movies">
+    <div
+      v-for="movie in movies"
+      v-on:click="selectedMovie = movie"
+      v-bind:class="{ selected: movie === selectedMovie }"
+    >
       <h2>{{ movie.title }}</h2>
-      <p>Year: {{ movie.year }}</p>
-      <p>Director: {{ movie.director }}</p>
-      <p>Plot: {{ movie.plot }}</p>
+      <router-link :to="`/movies/${movie.id}`">
+        <img v-bind:src="movie.image_url" alt="" />
+        <br />
+        <br />
+      </router-link>
     </div>
   </div>
 </template>
 
-<style></style>
+<style>
+.selected {
+  background-color: aqua;
+  transition: background-color 1s ease;
+}
+</style>
 
 <script>
 import axios from "axios";
 export default {
   data: function() {
     return {
-      message: "Welcome to Zen's Movie Page!",
-      movies: []
+      movies: [],
+      selectedMovie: {}
     };
   },
   created: function() {

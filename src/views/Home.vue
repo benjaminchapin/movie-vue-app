@@ -24,6 +24,7 @@
     <!-- indes/show action -->
     <div v-for="movie in movies">
       <h2>Title: {{ movie.title }}</h2>
+      <img v-bind:src="movie.image_url" alt="" />
       <h3>Year: {{ movie.year }}</h3>
       <button v-on:click="movie.showExtraInfo = !movie.showExtraInfo">More Info</button>
       <div v-if="movie.showExtraInfo">
@@ -49,13 +50,24 @@
           <br />
           <button v-on:click="updateMovie(movie)">Update</button>
           <button v-on:click="destroyMovie(movie)">Delete</button>
+          <br />
+          <br />
+          <br />
         </div>
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   </div>
 </template>
 
-<style></style>
+<style>
+img {
+  width: 250px;
+}
+</style>
 
 <script>
 // var axios = require("axios");
@@ -63,7 +75,7 @@ import axios from "axios"; //don't forget to add this!!!
 export default {
   data: function() {
     return {
-      message: "Welcome to Zen's Movie App!",
+      message: "Welcome to Zen's Movie Browser",
       movies: [],
       newMovieTitle: "",
       newMovieYear: null,
